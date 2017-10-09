@@ -35,6 +35,13 @@ namespace OpenCV.Net
         /// <param name="borderValue">Border value in case of a constant border </param>
         /// <param name="anchor">Position of the anchor within the element; default value (-1, -1) means that the anchor is at the element center.</param>
         /// <returns>Output image of the same size and type as <code>src</code>.</returns>
+        /// <remarks>
+        /// http://docs.opencv.org/2.4/modules/imgproc/doc/filtering.html?highlight=dilate#dilate
+        /// C++: void dilate(InputArray src, OutputArray dst, InputArray kernel, Point anchor=Point(-1,-1), int iterations=1, int borderType=BORDER_CONSTANT, const Scalar& borderValue=morphologyDefaultBorderValue() )
+        /// Python: cv2.dilate(src, kernel[, dst[, anchor[, iterations[, borderType[, borderValue]]]]]) → dst
+        /// C: void cvDilate(const CvArr* src, CvArr* dst, IplConvKernel* element = NULL, int iterations = 1 )
+        /// Python: cv.Dilate(src, dst, element=None, iterations=1) → None
+        /// </remarks>
         public static IOutputArray Dilate(IInputArray src, IInputArray element = null, Point? anchor = null, int iterations = 1, Emgu.CV.CvEnum.BorderType borderType = BorderType.Constant, MCvScalar? borderValue = null)
         {
             if (!anchor.HasValue)
@@ -59,9 +66,13 @@ namespace OpenCV.Net
         /// <param name="borderType">Pixel extrapolation method <seealso cref="BorderInterpolate"/></param>
         /// <param name="borderValue">Border value in case of a constant border, use Constant for default</param>
         /// <returns>Output image of the same size and type as <code>src</code>.</returns>
-        /// 
+        /// <remarks>
+        /// http://docs.opencv.org/2.4/modules/imgproc/doc/filtering.html?highlight=erode#erode
         /// C++: void erode(InputArray src, OutputArray dst, InputArray kernel, Point anchor=Point(-1,-1), int iterations=1, int borderType=BORDER_CONSTANT, const Scalar& borderValue=morphologyDefaultBorderValue() )
         /// Python: cv2.erode(src, kernel[, dst[, anchor[, iterations[, borderType[, borderValue]]]]]) → dst
+        /// C: void cvErode(const CvArr* src, CvArr* dst, IplConvKernel* element=NULL, int iterations=1)
+        /// Python: cv.Erode(src, dst, element=None, iterations=1) → None
+        /// </remarks>
         public static IOutputArray Erode(IInputArray src, IInputArray element = null, Point? anchor = null, int iterations = 1, Emgu.CV.CvEnum.BorderType borderType = BorderType.Constant, MCvScalar? borderValue = null)
         {
             if (!anchor.HasValue)
@@ -86,6 +97,11 @@ namespace OpenCV.Net
         /// <param name="sigmaY">Gaussian kernel standard deviation in Y direction; if sigmaY is zero, it is set to be equal to sigmaX, if both sigmas are zeros, they are computed from ksize.width and ksize.height , respectively (see getGaussianKernel() for details); to fully control the result regardless of possible future modifications of all this semantics, it is recommended to specify all of ksize, sigmaX, and sigmaY.</param>
         /// <param name="borderType">Pixel extrapolation method</param>
         /// <returns>Output image of the same size and type as src.</returns>
+        /// <remarks>
+        /// http://docs.opencv.org/2.4/modules/imgproc/doc/filtering.html?highlight=dilate#gaussianblur
+        /// C++: void GaussianBlur(InputArray src, OutputArray dst, Size ksize, double sigmaX, double sigmaY=0, int borderType=BORDER_DEFAULT )
+        /// Python: cv2.GaussianBlur(src, ksize, sigmaX[, dst[, sigmaY[, borderType]]]) → dst
+        /// </remarks>
         public static IOutputArray GaussianBlur(IInputArray src, Size ksize, double sigmaX, double sigmaY = 0, BorderType borderType = BorderType.Reflect101)
         {
             Mat dst = new Mat();
