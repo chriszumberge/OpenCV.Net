@@ -6,6 +6,10 @@ OpenCV.Net reimplements the methods of the Emgu CV library, but conforms them to
 style so that they can be more easily used with the python/C documentation and examples.
 
 Most notably this means adding return types and optional parameters.
+However, this also includes adding method overloads that accept common C# classes, for example
+OpenCV uses the `MCvScalar` class to define colors when drawing on frames.
+OpenCV.Net offers an overload of the method that uses `System.Drawing.Color`.
+
 
 
 ### Example
