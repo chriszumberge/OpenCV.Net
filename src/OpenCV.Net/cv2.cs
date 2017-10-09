@@ -87,6 +87,29 @@ namespace OpenCV.Net
             return dst;
         }
 
+        /// <summary>
+        /// Retrieves contours from the binary image and returns the number of retrieved contours. The pointer firstContour is filled by the function. It will contain pointer to the first most outer contour or IntPtr.Zero if no contours is detected (if the image is completely black). Other contours may be reached from firstContour using h_next and v_next links. The sample in cvDrawContours discussion shows how to use contours for connected component detection. Contours can be also used for shape analysis and object recognition - see squares.c in OpenCV sample directory
+        /// The function modifies the source image content
+        /// </summary>
+        /// <param name="image">The source 8-bit single channel image. Non-zero pixels are treated as 1s, zero pixels remain 0s - that is image treated as binary. To get such a binary image from grayscale, one may use cvThreshold, cvAdaptiveThreshold or cvCanny. The function modifies the source image content</param>
+        /// <param name="hierarchy">Optional output vector, containing information about the image topology.</param>
+        /// <param name="mode">Retrieval mode</param>
+        /// <param name="method">Approximation method (for all the modes, except CV_RETR_RUNS, which uses built-in approximation). </param>
+        /// <returns>Detected contours. Each contour is stored as a vector of points.</returns>
+        /// <remarks>
+        /// http://docs.opencv.org/2.4/modules/imgproc/doc/structural_analysis_and_shape_descriptors.html?highlight=findcontours
+        /// C++: void findContours(InputOutputArray image, OutputArrayOfArrays contours, OutputArray hierarchy, int mode, int method, Point offset=Point())
+        /// C++: void findContours(InputOutputArray image, OutputArrayOfArrays contours, int mode, int method, Point offset = Point())
+        /// Python: cv2.findContours(image, mode, method[, contours[, hierarchy[, offset]]]) → contours, hierarchy
+        /// C: int cvFindContours(CvArr* image, CvMemStorage* storage, CvSeq** first_contour, int header_size = sizeof(CvContour), int mode = CV_RETR_LIST, int method = CV_CHAIN_APPROX_SIMPLE, CvPoint offset = cvPoint(0, 0))
+        /// Python: cv.FindContours(image, storage, mode=CV_RETR_LIST, method=CV_CHAIN_APPROX_SIMPLE, offset=(0, 0)) → contours
+        /// </remarks>
+        public static VectorOfVectorOfPoint FindContours(IInputOutputArray src, Emgu.CV.CvEnum.RetrType mode = RetrType.List, ChainApproxMethod method = ChainApproxMethod.ChainApproxSimple)
+        {
+            VectorOfVectorOfPoint contours = new VectorOfVectorOfPoint();
+            CvInvoke.FindContours(src, contours, null, mode, method);
+            return contours;
+        }
 
         /// <summary>
         /// Blurs an image using a Gaussian filter.
