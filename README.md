@@ -1,4 +1,4 @@
-# OpenCV.Net
+﻿# OpenCV.Net
 
 OpenCV.Net is a reimplementation of [Emgu CV](https://github.com/emgucv/emgucv), a cross-platform .Net wrapper to the OpenCV image processing library.
 
@@ -6,3 +6,35 @@ OpenCV.Net reimplements the methods of the Emgu CV library, but conforms them to
 style so that they can be more easily used with the python/C documentation and examples.
 
 Most notably this means adding return types and optional parameters.
+
+
+### Example
+The [OpenCV API Documentation defines erode](http://docs.opencv.org/2.4/modules/imgproc/doc/filtering.html?highlight=erode#erode)
+in C++ as:
+```C++
+void erode(InputArray src, OutputArray dst, InputArray kernel, Point anchor=Point(-1,-1), int iterations=1, int borderType=BORDER_CONSTANT, const Scalar& borderValue=morphologyDefaultBorderValue() )
+```
+and in Python as:
+```Python
+cv2.erode(src, kernel[, dst[, anchor[, iterations[, borderType[, borderValue]]]]]) → dst
+```
+
+
+EmguCV defines the method as:
+```C#
+public static void Erode(IInputArray src, IOutputArray dst, IInputArray element, Point anchor, int iterations, CvEnum.BorderType borderType, MCvScalar borderValue)
+```
+
+But OpenCV.Net wraps the EmguCV method as:
+```C#
+public static IOutputArray Erode(IInputArray src, IInputArray kernel = null, Point? anchor = null, int iterations = 1, Emgu.CV.CvEnum.BorderType borderType = BorderType.Constant, MCvScalar? borderValue = null)
+```
+
+so that when a C# developer see this line in a python tutorial
+```Python
+output = cv2.erode(mask, None, iterations=2)
+```
+they can simply write:
+```C#
+Mat output = Cv2.Erode(src, null, iterations = 2);
+```
