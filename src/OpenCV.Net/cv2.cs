@@ -331,5 +331,21 @@ namespace OpenCV.Net
             // No change needed, just wrapping to complete the api
             CvInvoke.PutText(img, text, org, fontFace, fontScale, color.ToMCvSCalar(), thickness, lineType, bottomLeftOrigin);
         }
+
+        /// <summary>
+        /// Resizes the image src down to or up to the specified size
+        /// </summary>
+        /// <param name="src">Source image.</param>
+        /// <param name="dsize">Output image size; if it equals zero, it is computed as: dsize=Size(round(fx*src.cols), round(fy * src.rows)). Either dsize or both fx and fy must be non-zero.</param>
+        /// <param name="fx">Scale factor along the horizontal axis</param>
+        /// <param name="fy">Scale factor along the vertical axis;</param>
+        /// <param name="interpolation">Interpolation method</param>
+        /// <returns>Resulting image of the resize</returns>
+        public static IOutputArray Resize(IInputArray src, Size dsize, double fx = 0, double fy = 0, Emgu.CV.CvEnum.Inter interpolation = Emgu.CV.CvEnum.Inter.Linear)
+        {
+            Mat dst = new Mat();
+            CvInvoke.Resize(src, dst, dsize, fx, fy, interpolation);
+            return dst;
+        }
     }
 }

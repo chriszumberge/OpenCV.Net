@@ -18,11 +18,7 @@ namespace OpenCV.Net
         //public static implicit operator MCvScalar(Color c) => new MCvScalar(c.R, c.G, c.B);
         public static MCvScalar ToMCvSCalar(this Color color)
         {
-            int r = color.R;
-            int g = color.G;
-            int b = color.B;
-
-            return new MCvScalar(b, g, r);
+            return new Bgr(color).MCvScalar;
         }
     }
 }
