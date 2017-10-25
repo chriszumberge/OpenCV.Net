@@ -184,6 +184,11 @@ namespace OpenCV.Net
             return dst;
         }
 
+        public static Mat Imread(string filename, ImreadModes loadType = ImreadModes.Color)
+        {
+            // No change needed, just wrapping to complete the api
+            return CvInvoke.Imread(filename, loadType);
+        }
 
         /// <summary>
         /// Performs range check for every element of the input array:
