@@ -21,7 +21,7 @@ cv2.erode(src, kernel[, dst[, anchor[, iterations[, borderType[, borderValue]]]]
 
 
 EmguCV defines the method adhering to the C++ documentation as:
-```C#
+```C++
 public static void Erode(IInputArray src, IOutputArray dst, IInputArray element, Point anchor, int iterations, CvEnum.BorderType borderType, MCvScalar borderValue)
 ```
 
@@ -32,10 +32,15 @@ public static IOutputArray Erode(IInputArray src, IInputArray kernel = null, Poi
 
 so that when a C# developer sees this line in a python tutorial
 ```Python
-output = cv2.erode(mask, None, iterations=2)
+output = cv2.erode(src, None, iterations=2)
 ```
 they can simply write:
 ```C#
 Mat output = Cv2.Erode(src, null, iterations = 2);
 ```
-in their C# class.
+in their C# class, instead of writing:
+```C++
+Mat dst = new Mat();
+CvInvoke.Erode(src, dst, null, new Point(-1, 1), 2, BorderType.Constant, CvInvoke.MorphologyDefaultBorderValue);
+```
+as would be required by the Emgu CV library.
